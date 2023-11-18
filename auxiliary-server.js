@@ -1,5 +1,5 @@
 const express = require('express');
-const axios = require('axios'); // Axios ekleniyor
+const axios = require('axios');
 const https = require('https');
 const path = require('path');
 require('dotenv').config({ path: './auxiliary-server.env' });
@@ -35,6 +35,17 @@ app.get('/load-remote-index', async (req, res) => {
     res.send(response.data);
   } catch (error) {
     console.error('Error during remote index request:', error.message);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+// Serve the remote index.html file from the main server
+app.get('/remote-index', async (req, res) => {
+  try {
+    const response = await axiosAgent.get(`${mainServerAddress}/index.html`);
+    res.send(response.data);
+  } catch (error) {
+    console.error('Error during remote index.html request:', error.message);
     res.status(500).send('Internal Server Error');
   }
 });
