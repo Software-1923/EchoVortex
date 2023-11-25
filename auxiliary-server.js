@@ -52,7 +52,7 @@ app.get('/remote-index', async (req, res) => {
 
 // Catch-all route for handling other requests (404)
 app.get('*', (req, res) => {
-  res.status(404).sendFile(path.join(__dirname, 'dist', 'error-page', '404.html'));
+  res.status(404).sendFile(path.join(__dirname, 'dist','index.html'));
 });
 
 // Start the secondary server
